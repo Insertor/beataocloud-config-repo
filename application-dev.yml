@@ -70,6 +70,41 @@ spring:
   sleuth:
     sampler:
       percentage: 0.2
+  ftp:
+    domain: https://img.beatao.com/
+    host: 106.54.2.95
+    port: 21
+    username: bianli
+    password: chi434898
+    encoding: GBK
+    rabbitmq:
+      host: mq.beatao.com
+      port: 5672
+      username: guest
+      password: chi434898
+      publisher-confirms: true
+      connection-timeout:
+      virtual-host: /
+      # RabbitMQ监听配置
+      listener:
+        simple:
+          ## 初始并发量
+          concurrency: 5
+          ## 最大并发量
+          max-concurrency: 15
+          ## 签收方式
+          acknowledge-mode: manual
+          ## 最多一次消费多少条数据 -限流
+          prefetch: 1
+    wx:
+      appid: wxc92f6c078b711e55
+      secret: 8ad51cee005153a80fa86afefa729cca
+    aes:
+      key: '%3@O41^H5&$%&4P*'
+      iv: ~12@23!@#D3!3^5%
+    dx:
+      appid: 1400146838
+      appkey: a4d2ff08d19798dc895daa37b5f42947
 
 feign:
   hystrix:
