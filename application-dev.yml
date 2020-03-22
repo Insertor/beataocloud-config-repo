@@ -12,32 +12,18 @@ spring:
   aop:
     proxy-target-class: true
     auto: true
-  rabbitmq:
-    host: paascloud-mq-rabbit
-    port: 5672
-    username: guest
-    password: guest
   redis:
     host: paascloud-db-redis
     password: paascloud@redis
     port: 6379
     timeout: 0
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    filters: stat,wall
-    druid:
-      initial-size: 50
-      min-idle: 50
-      max-active: 100
-      test-on-borrow: true
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      web-stat-filter:
-        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
-      stat-view-servlet:
-        allow:
-        login-username: admin
-        login-password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 3
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      connection-test-query: SELECT 1
   mail:
     host: smtp.163.com
     username: paascloudTest@163.com
@@ -77,34 +63,34 @@ spring:
     username: bianli
     password: chi434898
     encoding: GBK
-    rabbitmq:
-      host: mq.beatao.com
-      port: 5672
-      username: guest
-      password: chi434898
-      publisher-confirms: true
-      connection-timeout:
-      virtual-host: /
-      # RabbitMQ监听配置
-      listener:
-        simple:
-          ## 初始并发量
-          concurrency: 5
-          ## 最大并发量
-          max-concurrency: 15
-          ## 签收方式
-          acknowledge-mode: manual
-          ## 最多一次消费多少条数据 -限流
-          prefetch: 1
-    wx:
-      appid: wxc92f6c078b711e55
-      secret: 8ad51cee005153a80fa86afefa729cca
-    aes:
-      key: '%3@O41^H5&$%&4P*'
-      iv: ~12@23!@#D3!3^5%
-    dx:
-      appid: 1400146838
-      appkey: a4d2ff08d19798dc895daa37b5f42947
+  rabbitmq:
+    host: mq.beatao.com
+    port: 5672
+    username: guest
+    password: chi434898
+    publisher-confirms: true
+    connection-timeout:
+    virtual-host: /
+    # RabbitMQ监听配置
+    listener:
+      simple:
+        ## 初始并发量
+        concurrency: 5
+        ## 最大并发量
+        max-concurrency: 15
+        ## 签收方式
+        acknowledge-mode: manual
+        ## 最多一次消费多少条数据 -限流
+        prefetch: 1
+  wx:
+    appid: wxc92f6c078b711e55
+    secret: 8ad51cee005153a80fa86afefa729cca
+  aes:
+    key: '%3@O41^H5&$%&4P*'
+    iv: ~12@23!@#D3!3^5%
+  dx:
+    appid: 1400146838
+    appkey: a4d2ff08d19798dc895daa37b5f42947
 
 feign:
   hystrix:
