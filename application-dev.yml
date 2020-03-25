@@ -1,12 +1,12 @@
-server:
-  tomcat:
-    uri-encoding: UTF-8
-    remote-ip-header: x-forwarded-for
-  use-forward-headers: true
-
-management:
-  security:
-    enabled: false
+#server:
+#  tomcat:
+#    uri-encoding: UTF-8
+#    remote-ip-header: x-forwarded-for
+#  use-forward-headers: true
+#
+#management:
+#  security:
+#    enabled: false
 
 spring:
   aop:
